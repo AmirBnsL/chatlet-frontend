@@ -14,7 +14,7 @@ export default function LoginForm() {
     const mutation = useMutation({
         mutationFn:  (data:Inputs) => {
             return axios.get("http://localhost:8080/token",{auth: {
-                username: data.email,
+                username: data.username,
                 password: data.password
                 }})
         },

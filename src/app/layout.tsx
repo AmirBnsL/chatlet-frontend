@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import Providers from "@/app/Provider";
 
 const inter = Plus_Jakarta_Sans({ subsets: ["latin"] });

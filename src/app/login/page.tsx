@@ -1,9 +1,6 @@
-import LoginForm from "@/app/login/components/LoginForm";
-import Image from "next/image";
 import {ReactNode} from "react";
 import NavBar from "@/app/components/NavBar";
-
-
+import LoginForm from "@/app/login/components/LoginForm";
 
 
 export default function Login(): ReactNode {

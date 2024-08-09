@@ -4,11 +4,11 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
 
 const schema = z.object({
-    email: z.string().email({message: "Invalid Email"}).min(1, "required"),
+    username: z.string().min(8, "Username must be at least 8 characters"),
     password: z.string().min(8, "Password must be at least 8 characters")
 })
 export type Inputs = {
-    email: string
+    username: string
     password: string
 }
 
@@ -27,10 +27,10 @@ export default function Form({onSubmit, buttonText}: { onSubmit: SubmitHandler<I
     return <form className={"flex justify-center items-center gap-3 flex-col w-full"} onSubmit={handleSubmit(onSubmit)}>
         <div className={" flex-col flex justify-start py-3 px-4 w-2/5 md:w-full max-w-md m-0"}>
 
-            <label className={"text-white"} form={"email"}>Email</label>
-            <input id={"email"} type={"text"} placeholder={"Email"} {...register("email", {required: true})}
+            <label className={"text-white"} form={"username"}>Username</label>
+            <input id={"username"} type={"text"} placeholder={"username"} {...register("username", {required: true})}
                    className={"p-4 w-full rounded-xl bg-lessLightBrown border-lightBrown border-[1px] placeholder:text-lightBrown"}/>
-            {errors.email && <p className={"text-red-600 text-sm"}>{errors.email?.message}</p>}
+            {errors.username && <p className={"text-red-600 text-sm"}>{errors.username?.message}</p>}
         </div>
         <div className={" flex-col flex justify-start py-3 px-4 w-2/5 md:w-full max-w-md"}>
             <label form={"Password"} className={"text-white"}>Password</label>

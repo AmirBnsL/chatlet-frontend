@@ -19,7 +19,8 @@ const config: Config = {
         'lessLightBrown': "#26211C",
         'greyBrown' : "#383029",
         'teal' : "#b56617",
-        'cream': "#B8AB9E"
+        'cream': "#B8AB9E",
+
 
 
         },
