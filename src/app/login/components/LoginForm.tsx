@@ -6,11 +6,14 @@ import {JSX} from "react/jsx-runtime";
 import IntrinsicAttributes = JSX.IntrinsicAttributes;
 import {useMutation} from "@tanstack/react-query";
 import axios from "axios";
+import {useRouter} from "next/navigation";
 
 
 
 
 export default function LoginForm() {
+
+    const router = useRouter();
     const mutation = useMutation({
         mutationFn:  (data:Inputs) => {
             return axios.get("http://localhost:8080/token",{auth: {
@@ -18,7 +21,11 @@ export default function LoginForm() {
                 password: data.password
                 }})
         },
-        onSuccess: data => console.log(data)
+        onSuccess: data =>  {
+            console.log("mission seccesful")
+            router.push("/home");
+        }
+
     });
 
     const onSubmit :SubmitHandler<Inputs> & IntrinsicAttributes = (data, event) => {
