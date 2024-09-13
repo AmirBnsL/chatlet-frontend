@@ -3,6 +3,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import {useMutation} from "@tanstack/react-query";
+import EditProfile from "@/lib/ProfileEditQueries";
 
 interface Inputs {
     username: string;
@@ -36,13 +38,12 @@ export default function PersonalDataForm() {
         formState: { errors },
     } = useForm<Inputs>({ resolver: zodResolver(schema) });
 
-    const onFormSubmit: SubmitHandler<Inputs> = (data, e) => {
-        e?.preventDefault();
-        console.log("Form Data:", data);
-    };
+
+
+
 
     return (
-        <form className="flex flex-col justify-between gap-4 text-white grow" onSubmit={handleSubmit(onFormSubmit)}>
+        <form action={EditProfile} className="flex flex-col justify-between gap-4 text-white grow" >
             <h1 className="text-lg font-bold">Your Personal Data</h1>
             <div className="flex flex-col justify-start gap-4">
                 <div className="flex flex-col gap-1 justify-start w-full">

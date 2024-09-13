@@ -2,6 +2,7 @@
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
+import {logIn} from "@/lib/LoginActions";
 
 const schema = z.object({
     username: z.string().min(8, "Username must be at least 8 characters"),
@@ -13,7 +14,7 @@ export type Inputs = {
 }
 
 
-export default function Form({onSubmit, buttonText}: { onSubmit: SubmitHandler<Inputs>, buttonText: string }) {
+export default function Form({ buttonText}: { buttonText: string }) {
     const {
         register,
         handleSubmit,
@@ -24,7 +25,7 @@ export default function Form({onSubmit, buttonText}: { onSubmit: SubmitHandler<I
 
 
 
-    return <form className={"flex justify-center items-center gap-3 flex-col w-full"} onSubmit={handleSubmit(onSubmit)}>
+    return <form action={logIn} className={"flex justify-center items-center gap-3 flex-col w-full"} >
         <div className={" flex-col flex justify-start py-3 px-4 w-2/5 md:w-full max-w-md m-0"}>
 
             <label className={"text-white"} form={"username"}>Username</label>
