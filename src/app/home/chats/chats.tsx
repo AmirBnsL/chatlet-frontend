@@ -12,6 +12,7 @@ interface Contact {
 
 export default async function Chats() {
     const contacts : Array<Contact> = await getContacts();
+    console.log(contacts)
 
     return (
         <>

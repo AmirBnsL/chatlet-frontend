@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function Contact({avatarLink,name,lastMessage,lastMessageTime}:{avatarLink:string,name:string,lastMessage:string,lastMessageTime:string}) {
     return <Link href={`/home/chats/${name}`} className={"w-full p-4 flex gap-3 items-center justify-evenly border-b-2 border-darkBrown"}>
         <div className={"relative h-14 w-14"}>
-            <Image src={avatarLink} alt={"Account avatar"} fill={true}/>
+            <Image src={"/"+ avatarLink} alt={"Account avatar"} fill={true}/>
 
         </div>
         <div className={"flex flex-col items-center justify-start"}>

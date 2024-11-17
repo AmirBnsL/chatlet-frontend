@@ -2,9 +2,10 @@
 
 import axios from "axios";
 import {cookies} from "next/headers";
-
-export default async function EditProfile(formData:FormData) {
+import {redirect} from "next/navigation";
     const token = cookies().get('token')?.value;
+
+export async function EditProfile(formData:FormData) {
     console.log(formData);
 
     const data =  Object.fromEntries(formData.entries());
@@ -23,4 +24,47 @@ export default async function EditProfile(formData:FormData) {
 
 
 }
+
+
+
+
+export async function disableAccount() {
+    try {
+    const response = await axios.post("http://localhost:8080/disable",null,{headers:{
+        Authorization: `Bearer ${token}`
+        }});
+    }   catch (e) {
+        console.log(e)
+    }
+
+
+}
+
+export async function deleteAccount() {
+    try {
+        const response = await axios.delete("http://localhost:8080/profile",{headers:{
+                Authorization: `Bearer ${token}`
+            }});
+    }   catch (e) {
+        console.log(e)
+    }
+
+
+}
+
+export async function logOut() {
+
+    try {
+
+        cookies().delete('token');
+
+        redirect("/login");
+
+    }  catch (e) {
+        console.log(e);
+    }
+
+}
+
+
 

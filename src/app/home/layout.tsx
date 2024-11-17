@@ -7,6 +7,7 @@ const NavLinks = [
     {id:1,link: "/home/profile", image: "/accountpic.png"},
     {id:2,link: "/home/settings", image: "/settings.svg"},
     {id:3,link: "/home/chats", image: "/chat.png"},
+    {id:4,link:"/home/invite",image:"/plusAccount.png"},
 
 ]
 

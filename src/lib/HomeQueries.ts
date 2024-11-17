@@ -10,8 +10,8 @@ export default async function getContacts() {
 
         const response = await axios.get("http://localhost:8080/contacts", {headers:
                 {Authorization: `Bearer ${token}`},withCredentials: true} );
-        console.log(response.status)
-        return response.data.data;
+        console.log(response.data);
+        return response.data;
     }   catch (error) {
         console.log(error)
     }

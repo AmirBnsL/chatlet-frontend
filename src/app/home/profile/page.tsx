@@ -8,7 +8,7 @@ import ProfileSettingsArea from "@/app/home/profile/components/ProfileSettingsAr
 
 export default function Profile() {
     return <>
-        <ContactsMenu menuTitle={"Profile Settings"}>
+        <ContactsMenu menuTitle={"Profile Settings"} eventListener={}>
             <MenuItem imageLink={"/pencil.png"} name={"Edit profile settings"} redirect={"/profile/edit"}></MenuItem>
         </ContactsMenu>
         <ProfileSettingsArea></ProfileSettingsArea>
