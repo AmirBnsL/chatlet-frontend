@@ -14,7 +14,7 @@ export interface Message {
 
 export async function getMessages(friendName: string): Promise<Array<Message>> {
     try {
-        const response = await axios("http://localhost:8080/messages", {
+        const response = await axios("http://localhost:8080/messages?", {
                 params: {
                     friendName: friendName,
                 }

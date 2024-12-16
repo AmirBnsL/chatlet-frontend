@@ -1,4 +1,3 @@
-// app/context/WebSocketContext.tsx
 "use client";
 
 import React, {createContext, useContext, useEffect, useState} from "react";
@@ -37,7 +36,7 @@ export const WebSocketProvider: React.FC<{ children: React.ReactNode, cookie: st
         ws.onclose = () => console.log("WebSocket disconnected");
 
         return () => ws.close();
-    }, []);
+    }, [cookie]);
 
     const sendMessage = (message: string) => {
         if (socket && socket.readyState === WebSocket.OPEN) {
