@@ -4,7 +4,6 @@ import axios from "axios";
 import {cookies} from "next/headers";
 import {revalidatePath} from "next/cache";
 
-const token = cookies().get('token')?.value;
 
 interface Inputs {
     username: string;
@@ -15,6 +14,8 @@ interface Inputs {
 }
 
 export async function EditProfile(formData: Inputs) {
+    const token = cookies().get('token')?.value;
+
     console.log(formData);
 
 
@@ -34,6 +35,8 @@ export async function EditProfile(formData: Inputs) {
 
 
 export async function disableAccount() {
+    const token = cookies().get('token')?.value;
+
     try {
         await axios.post("http://localhost:8080/disable", null, {
             headers: {
@@ -48,6 +51,8 @@ export async function disableAccount() {
 }
 
 export async function deleteAccount() {
+    const token = cookies().get('token')?.value;
+
     try {
         await axios.delete("http://localhost:8080/profile", {
             headers: {
@@ -63,6 +68,7 @@ export async function deleteAccount() {
 
 export async function logOut() {
 
+
     try {
 
         cookies().delete('token');
@@ -76,6 +82,8 @@ export async function logOut() {
 
 
 export async function uploadProfilePicture(formData: FormData) {
+    const token = cookies().get('token')?.value;
+
     try {
         const blob = formData.get("file") as Blob;
         console.log({blob})
@@ -96,6 +104,8 @@ export async function uploadProfilePicture(formData: FormData) {
 
 
 export async function getProfilePicture(): Promise<string | undefined> {
+    const token = cookies().get('token')?.value;
+
 
     try {
         const response = await fetch("http://localhost:8080/profile/picture", {
@@ -125,7 +135,32 @@ export async function getProfilePicture(): Promise<string | undefined> {
 
 }
 
+export async function getProfileByPictureLink(pictureLink: string): Promise<string | undefined> {
+    const token = cookies().get('token')?.value;
+
+    try {
+        const response = await fetch(`http://localhost:8080/profile/picture/${pictureLink}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            method: "GET",
+            cache: "no-cache",
+        });
+        console.log(response.status +"from getProfileByPictureLink");
+        const arrayBuffer = await response.arrayBuffer(); // Convert to ArrayBuffer
+        const buffer = Buffer.from(arrayBuffer); // Convert to Buffer
+        return `data:${response.headers.get('Content-Type')};base64,${buffer.toString(
+            'base64'
+        )}`;
+
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 export async function getProfileData(): Promise<ProfileDto | undefined> {
+    const token = cookies().get('token')?.value;
+
     try {
         const response = await fetch("http://localhost:8080/profile", {
 

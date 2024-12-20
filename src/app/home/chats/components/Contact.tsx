@@ -1,10 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getProfileByPictureLink, getProfilePicture} from "@/lib/ProfileEditQueries";
 
-export default function Contact({avatarLink,name,lastMessage,lastMessageTime}:{avatarLink:string,name:string,lastMessage:string,lastMessageTime:string}) {
+export default async function Contact({avatarLink,name,lastMessage,lastMessageTime}:{avatarLink:string,name:string,lastMessage:string,lastMessageTime:string}) {
+
+    const avatar = await getProfileByPictureLink(avatarLink);
+    console.log({avatar});
+
     return <Link href={`/home/chats/${name}`} className={"w-full p-4 flex gap-3 items-center justify-evenly border-b-2 border-darkBrown"}>
         <div className={"relative h-14 w-14"}>
-            <Image src={"/"+ avatarLink} alt={"Account avatar"} fill={true}/>
+            <Image src={avatar || avatarLink} alt={"Account avatar"} fill={true}/>
 
         </div>
         <div className={"flex flex-col items-center justify-start"}>
