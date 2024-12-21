@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { getProfileByPictureLink, getProfilePicture} from "@/lib/ProfileEditQueries";
+import { getProfilePictureByPictureLink, getProfilePicture} from "@/lib/ProfileEditQueries";
 
 export default async function Contact({avatarLink,name,lastMessage,lastMessageTime}:{avatarLink:string,name:string,lastMessage:string,lastMessageTime:string}) {
 
-    const avatar = await getProfileByPictureLink(avatarLink);
-    console.log({avatar});
+    const avatar = await getProfilePictureByPictureLink(avatarLink);
+
+
 
     return <Link href={`/home/chats/${name}`} className={"w-full p-4 flex gap-3 items-center justify-evenly border-b-2 border-darkBrown"}>
         <div className={"relative h-14 w-14"}>

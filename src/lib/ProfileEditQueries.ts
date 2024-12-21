@@ -135,7 +135,7 @@ export async function getProfilePicture(): Promise<string | undefined> {
 
 }
 
-export async function getProfileByPictureLink(pictureLink: string): Promise<string | undefined> {
+export async function getProfilePictureByPictureLink(pictureLink: string): Promise<string | undefined> {
     const token = cookies().get('token')?.value;
 
     try {
