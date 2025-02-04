@@ -3,9 +3,6 @@
 import Image from "next/image";
 import React from "react";
 import {useMutation} from "@tanstack/react-query";
-import addContact from "@/lib/ContactQueries";
-import {ServerActionAction} from "next/dist/client/components/router-reducer/router-reducer-types";
-
 
 interface Inputs {
     searchText: string;

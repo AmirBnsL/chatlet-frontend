@@ -1,9 +1,15 @@
 'use server'
 
+
 import axios from "axios";
 import {cookies} from "next/headers";
 import {revalidatePath} from "next/cache";
 
+
+interface BackendResponse {
+    status: bigint;
+    message: string;
+}
 
 interface Inputs {
     username: string;
@@ -135,24 +141,22 @@ export async function getProfilePicture(): Promise<string | undefined> {
 
 }
 
-export async function getProfilePictureByPictureLink(pictureLink: string): Promise<string | undefined> {
+export async function getProfilePictureByUsername(username: string): Promise<BackendResponse | undefined> {
     const token = cookies().get('token')?.value;
 
+
     try {
-        const response = await fetch(`http://localhost:8080/profile/picture/${pictureLink}`, {
+        const response  = await fetch(`http://localhost:8080/profile/picture/base64/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
             method: "GET",
             cache: "no-cache",
         });
-        console.log(response.status +"from getProfileByPictureLink");
-        const arrayBuffer = await response.arrayBuffer(); // Convert to ArrayBuffer
-        const buffer = Buffer.from(arrayBuffer); // Convert to Buffer
-        return `data:${response.headers.get('Content-Type')};base64,${buffer.toString(
-            'base64'
-        )}`;
 
+        const data = await response.json();
+
+        return data as BackendResponse;
     } catch (e) {
         console.log(e)
     }
@@ -182,7 +186,7 @@ export interface ProfileDto {
     lastname: string;
     birth: string;
     gender: string;
-    pictureLink: string;
+    base64Avatar: string;
 }
 
 

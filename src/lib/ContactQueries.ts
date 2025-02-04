@@ -2,11 +2,12 @@
 import {cookies} from "next/headers";
 import axios from "axios";
 
-interface contact {
-    contactName: string;
+export interface ContactType {
+    id:bigint;
+    username: string;
 }
 
-export default async function addContact(data: string) {
+export async function addContact(data: string) {
     console.log(data);
 
 
@@ -19,12 +20,26 @@ export default async function addContact(data: string) {
                 Authorization: "Bearer " + cookies().get('token')?.value
             }
         });
-        console.log("we won");
         return response.data;
     } catch (error) {
         console.error(error)
         
     }
 
+
+}
+
+export async function getContacts(): Promise<Array<ContactType> | undefined> {
+
+    try {
+        const token = cookies().get('token')?.value;
+
+        const response = await axios.get("http://localhost:8080/contacts", {headers:
+                {Authorization: `Bearer ${token}`},withCredentials: true} );
+        console.log(response.data);
+        return response.data;
+    }   catch (error) {
+        console.log(error)
+    }
 
 }

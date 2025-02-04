@@ -8,12 +8,11 @@ import {verifyToken} from "@/lib/dal/dal";
 
 interface ChatAreaProps {
     name: string;
-    avatarLink: string;
 
 }
 
 
-export default async function ChatArea({name, avatarLink}: ChatAreaProps) {
+export default async function ChatArea({name}: ChatAreaProps) {
 
     const cookie = cookies().get('token')?.value;
 
@@ -23,7 +22,7 @@ export default async function ChatArea({name, avatarLink}: ChatAreaProps) {
 
     return <div className={"w-3/4 h-full grow bg-darkBrown flex flex-col"}>
         <WebSocketProvider cookie={cookie}>
-            <ChatAreaNavBar name={name} avatarLink={avatarLink}></ChatAreaNavBar>
+            <ChatAreaNavBar name={name} ></ChatAreaNavBar>
             <MessagesArea name={name}></MessagesArea>
             <MessageInput name={name} username={username.data}></MessageInput>
         </WebSocketProvider>
